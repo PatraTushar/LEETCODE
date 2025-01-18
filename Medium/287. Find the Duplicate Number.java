@@ -13,32 +13,31 @@ class Solution {
         
         while(i<nums.length){
 
-            int correct=nums[i]-1;
+            if(nums[i]!=i+1){
 
-            if(nums[i]!=nums[correct]){
+                int correct=nums[i]-1;
 
-                swap(nums,i,correct);
+                if(nums[i]!=nums[correct]){
 
+                    swap(nums,i,correct);
+                }
 
+                else{
+                    return nums[i];
+                }
             }
 
             else{
-
                 i++;
             }
+
+         
         }
-
-        for(int index=0;index<nums.length;index++){
-
-            
-
-            if(nums[index]!=index+1){
-             return nums[index];
-            }
-        }
-
 
         return -1;
+
+
+        
 
 
         
