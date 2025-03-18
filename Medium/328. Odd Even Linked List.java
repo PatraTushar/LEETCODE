@@ -20,7 +20,6 @@ class Solution {
         while(head!=null){
 
             tempo.next=temp;
-            if(temp==null) break;
             temp=temp.next;
             tempo=tempo.next;
 
