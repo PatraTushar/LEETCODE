@@ -31,7 +31,7 @@ class Solution {
 
             //  3. Traverse Bottom Row (←) [check needed]
 
-            if(topRow<=bottomRow) {
+            if(topRow<=bottomRow && leftColumn<=rightColumn) {
 
 
                 for (int i = rightColumn; i >= leftColumn; i--) {
@@ -44,7 +44,7 @@ class Solution {
 
           // 4. Traverse Left Column (↑) [check needed]
 
-            if(leftColumn<=rightColumn) {
+            if(topRow<=bottomRow && leftColumn<=rightColumn) {
 
                 for (int i = bottomRow; i >= topRow; i--) {
                     list.add(matrix[i][leftColumn]);
