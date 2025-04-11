@@ -1,63 +1,73 @@
 class Solution {
+
+       static int findMax(int[] arr){
+
+        int max=Integer.MIN_VALUE;
+
+        for(int i=0;i<arr.length;i++){
+         max= Math.max(max,arr[i]);
+        }
+
+        return max;
+    }
+
+      static int sumOfArr(int[] arr){
+        int sum=0;
+        for (int i=0;i<arr.length;i++){
+            sum+=arr[i];
+        }
+        return sum;
+    }
+
+     static int isPossible(int[] arr,int mid){
+
+        int parts=1;
+        int total=0;
+
+        for(int i=0;i<arr.length;i++){
+
+            if(total+arr[i]<=mid){
+                total+=arr[i];
+            }
+            else {
+                parts++;
+                total=arr[i];
+            }
+        }
+
+        return parts;
+        
+    }
+
+
     public int splitArray(int[] nums, int k) {
 
-        
-        int start=0;
-        int end=0;
+          int start=findMax(nums);
+        int end=sumOfArr(nums);
 
-        for(int i=0;i<nums.length;i++){
+        while (start<=end){
 
-            start=Math.max(start,nums[i]);
-            end+=nums[i];
-        }
-
-        while(start<end){
-
-            // try for mid as a potential ans
             int mid=start+(end-start)/2;
 
-            // calculate how many pieces you can divide this in with maximum sum
-            int sum=0;
-            int pieces=1;
+            int totalParts=isPossible(nums,mid);
 
-            for(int i=0;i<nums.length;i++){
-
-                if(sum+nums[i]>mid){
-                    // you cannot add this in this subArray,make new one
-                    // say you add this num in new subArray,then sum==num
-
-                    sum = nums[i];
-                    pieces++;
-
-                }else {
-
-                    sum=sum+nums[i];
-                }
+            if(totalParts>k){
+                start=mid+1;
 
             }
 
-            if(pieces>k){
-                
-                 start=mid+1;
-            }
-            
             else {
-
-                end=mid;
-                
-               
+                end=mid-1;
             }
-
-            
-
-
-
-
 
 
         }
 
-        return start;   // start==end
+        return start;
+
+
+
+       
     }
-        
-    }
+   
+}
