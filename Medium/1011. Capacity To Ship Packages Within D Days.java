@@ -1,57 +1,76 @@
 class Solution {
 
-    static boolean minCapacity(int arr[],int mid,int days){
-        
-        int load=0;
+     static int findMax(int[] arr){
+
+        int max=Integer.MIN_VALUE;
+
+        for(int a:arr){
+            if(a>max){
+                max=a;
+            }
+        }
+
+        return max;
+    }
+
+    static int findSum(int[] arr){
+
+        int sum=0;
+        for(int a: arr){
+            sum+=a;
+        }
+        return sum;
+    }
+
+    static int isPossible(int[] arr,int mid){
+
         int noOfDays=1;
+        int capacity=0;
 
         for(int i=0;i<arr.length;i++){
 
-            if(load+arr[i]<=mid){
-                load+=arr[i];
-              
+            if(capacity+arr[i]<=mid){
+
+                capacity+=arr[i];
+
             }
 
-            else{
-                noOfDays+=1;
-                load=arr[i];
-
-                if(noOfDays>days){
-                    return false;
-                }
+            else {
+                noOfDays++;
+                capacity=arr[i];
             }
 
         }
 
-        return noOfDays<=days;
-    } 
+        return noOfDays;
+
+
+    }
+
     public int shipWithinDays(int[] weights, int days) {
 
-        int start=0;
-        int end=0;
-        
+          if(days>weights.length) return -1;
 
-         for (int weight : weights) {
-            start = Math.max(start, weight); // Max weight
-            end += weight;                  // Total sum
-        }
-        
+        int start=findMax(weights);
+        int end=findSum(weights);
 
-        while(start<=end){
+        while (start<=end){
 
             int mid=start+(end-start)/2;
 
-            if(minCapacity(weights,mid,days)){
+            int totalDays=isPossible(weights,mid);
 
-                end=mid-1;
-            }
-
-            else{
+            if(totalDays>days){
 
                 start=mid+1;
             }
-        }
 
+            else {
+
+                end=mid-1;
+
+            }
+        }
         return start;
         
     }
