@@ -8,7 +8,7 @@ class Solution {
 
             if(count==0){
 
-                count=1;
+                count++;
                 element=nums[i];
             }
 
