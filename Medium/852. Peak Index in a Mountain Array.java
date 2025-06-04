@@ -4,17 +4,17 @@ class Solution {
          int start=0;
         int end=arr.length-1;
 
-        while(start!=end){
+        while(start<end){
 
             int mid=start+(end-start)/2;
 
-            if(arr[mid]<arr[mid+1]){
+            if(mid<end && arr[mid]>arr[mid+1]){
 
-                start=mid+1;
+                end=mid;
             }
 
             else{
-                end=mid;
+                start=mid+1;
             }
         }
 
