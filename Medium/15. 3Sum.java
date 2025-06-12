@@ -7,7 +7,7 @@ public class Q20 {
 
     static List<List<Integer>> threeSum(int[] arr){
         
-        //   Time Complexity (TC): O(n^2
+        //   Time Complexity (TC): O(n^2)
         //  Space Complexity (SC): O(k)
 
         List<List<Integer>> result=new ArrayList<>();
