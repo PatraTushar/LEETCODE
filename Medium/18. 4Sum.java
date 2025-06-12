@@ -1,45 +1,77 @@
-class Solution {
-    public List<List<Integer>> fourSum(int[] nums, int target) {
+package ArraysbyKK.strivers;
 
-          Arrays.sort(nums);
-        List<List<Integer>> result=new ArrayList<>();
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-        for(int i=0;i<nums.length;i++){
+public class Q21 {
 
-            if(i>0 && nums[i]==nums[i-1] ) continue;
+    static List<List<Integer>> fourSum(int[] arr,int target) {
+        
+        //Time Complexity (TC): O(n³)
+        //Space Complexity (SC):
+        //O(1) (excluding the space used for the output list)
+        //O(k) where k is the number of quadruplets in the result.
 
-            for(int j=i+1;j<nums.length;j++){
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(arr);
 
-                if(j!=i+1 && nums[j]==nums[j-1]) continue;
-                int k=j+1;
-                int l=nums.length-1;
+        int i = 0;
+        int n = arr.length;
 
-                while (k<l){
+        while (i < n - 3) {
 
-                    long sum=(long) nums[i]+nums[j]+nums[k]+nums[l];
+            int j = i + 1;
 
-                    if(sum==target){
 
-                        List<Integer> temp=List.of(nums[i],nums[j],nums[k],nums[l]);
-                        result.add(temp);
+            while (j < n - 2) {
+                int k = j + 1;
+                int l = n - 1;
+
+                while (k < l) {
+
+                    long sum = (long) arr[i] + arr[j] + arr[k] + arr[l];
+
+                    if (sum < target) {
                         k++;
+                    }
+                    else if (sum > target) {
                         l--;
-
-                        while (k<l && nums[k]==nums[k-1]) k++;
-                        while (k<l && nums[l]==nums[l+1]) l--;
-
                     }
-
-                    else if(sum<target){
-                        k++;
-
-                    }
-
                     else {
-                        l--;
+
+                        List<Integer> sum4=Arrays.asList(arr[i],arr[j],arr[k],arr[l]);
+                        result.add(sum4);
+
+
+                        int eleK=arr[k];
+                        int eleL=arr[l];
+
+                        while (k<l && eleK==arr[k]){
+                            k++;
+                        }
+
+                        while (k<l && eleL==arr[l]){
+                            l--;
+                        }
+
                     }
                 }
+
+
+                int eleJ=arr[j];
+
+                while (j<n-2 && eleJ==arr[j]){
+                    j++;
+
+                }
             }
+
+            int eleI=arr[i];
+            while (i<n-3 && eleI==arr[i]){
+                i++;
+            }
+
 
         }
 
@@ -48,6 +80,17 @@ class Solution {
 
 
 
-        
+
+    }
+
+    public static void main(String[] args) {
+
+        // 4 sum (leeTCode->15)
+
+        int[] arr={1,1,1,2,2,2,3,3,3,4,4,4,5,5};
+        int target=8;
+        List<List<Integer>> ans=fourSum(arr,target);
+        System.out.println(ans);
+
     }
 }
