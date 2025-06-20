@@ -23,6 +23,9 @@ public class Q27 {
 
     static Node reverseBetween(Node head, int left, int right) {
 
+        // //Time Complexity (TC): O(n)
+        //Space Complexity (SC): O(1)
+
         if(head==null) return null;
 
 
