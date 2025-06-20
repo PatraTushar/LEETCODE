@@ -4,6 +4,9 @@ public class Q26 {
 
     public static boolean isHappy(int n){
 
+          //Time Complexity: O(log n) per number × number of unique numbers in the cycle (at most 243) ⇒ O(log n)
+        //Space Complexity: O(1)
+
 
         int slow=n;
         int fast=findSquare(n);
