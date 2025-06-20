@@ -1,25 +1,37 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
+package linkedListByKK.SinglyLinkedList.InterviewQuestion;
 
-    
+public class Q28 {
 
 
-     static ListNode reverse(ListNode head){
+    public static class Node{
+
+        int data;
+        Node next;
+
+        Node(int data){
+
+            this.data=data;
+        }
+    }
+
+    static void display(Node head){
+
+        Node temp=head;
+        while (temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+        System.out.println();
+
+    }
+
+    static Node reverse(Node head){
 
         if(head==null || head.next==null) return head;
 
-        ListNode curr=head;
-        ListNode prev=null;
-        ListNode agla=null;
+        Node curr=head;
+        Node prev=null;
+        Node agla=null;
 
         while (curr!=null){
 
@@ -33,36 +45,76 @@ class Solution {
         return prev;
 
     }
-    public void reorderList(ListNode head) {
 
-    if (head == null || head.next == null) return ;
+    static void reorderSet(Node head){
+
+        //Time Complexity (TC): O(n)
+        //Space Complexity (SC): O(1)
 
 
-        ListNode slow=head;
-        ListNode fast=head;
 
-        while (fast.next!=null && fast.next.next!=null){
+        Node slow=head;
+        Node fast=head;
+
+
+        while ( fast.next!=null && fast.next.next!=null){
+
             slow=slow.next;
             fast=fast.next.next;
         }
 
-       ListNode reverse2ndHalf=reverse(slow.next);
-        slow.next=reverse2ndHalf;
 
-        ListNode t1=head;
-        ListNode t2=slow.next;
+        Node rev2ndHalf=reverse(slow.next);
+        slow.next=null;
 
-        while (t2!=null){
-            slow.next=t2.next;
-            t2.next=t1.next;
-            t1.next=t2;
-            t1=t2.next;
-             if(t1 == null) break;
-            t2=slow.next;
+        Node pointer1=head;
+        Node pointer2=rev2ndHalf;
+
+        while (pointer2!=null){
+
+            Node temp1 = pointer1.next;
+            Node temp2 = pointer2.next;
+
+            pointer1.next = pointer2;
+            pointer2.next = temp1;
+
+            pointer1 = temp1;
+            pointer2 = temp2;
+
+
+
+
         }
 
-    
+        display(head);
 
-        
+
+
+    }
+
+    public static void main(String[] args) {
+
+        // Q: Reorder list (leeTCode->143)
+
+        Node a=new Node(1);
+        Node b=new Node(2);
+        Node c=new Node(3);
+        Node d=new Node(4);
+        Node e=new Node(5);
+        Node f=new Node(6);
+
+        a.next=b;
+        b.next=c;
+        c.next=d;
+        d.next=e;
+        e.next=f;
+
+        display(a);
+
+
+        reorderSet(a);
+
+
+
     }
 }
