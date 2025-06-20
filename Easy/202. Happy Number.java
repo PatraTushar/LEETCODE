@@ -1,29 +1,43 @@
-class Solution {
+package linkedListByKK.SinglyLinkedList.InterviewQuestion;
+
+public class Q26 {
+
+    public static boolean isHappy(int n){
+
+
+        int slow=n;
+        int fast=findSquare(n);
+
+        while (slow!=fast){
+
+            slow=findSquare(slow);
+            fast=findSquare(findSquare(fast));
+
+
+        }
+
+        return slow==1;
+    }
+
     static int findSquare(int number){
         int ans=0;
 
-        while(number>0){
+        while (number>0){
             int rem=number%10;
-            ans+=rem*rem;
+            ans+=rem * rem;
             number/=10;
         }
 
         return ans;
     }
-    public boolean isHappy(int n) {
 
-        int slow=n;
-        int fast=n;
+    public static void main(String[] args) {
 
-        do{
-            slow=findSquare(slow);
-            fast=findSquare(findSquare(fast));
-        }while(slow!=fast);
+        // Q: Happy number (leeTCode->202)
 
-        if(slow==1) return true;
+        int n=19;
 
-        return false;
-      
-        
+        System.out.println(isHappy(n));
+
     }
 }
