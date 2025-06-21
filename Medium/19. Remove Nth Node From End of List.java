@@ -26,6 +26,9 @@ public class Q30 {
 
     public static Node removeNthFromEnd(Node head, int n) {
 
+         //Time Complexity (TC): O(n)
+        //Space Complexity (SC): O(1)
+
 
         if(head==null) return null;
 
