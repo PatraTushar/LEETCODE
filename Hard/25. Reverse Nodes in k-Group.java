@@ -75,7 +75,7 @@ public class Q29 {
             ListNode nextNode=kthNode.next;
             kthNode.next=null;
 
-          ListNode newHead=reverse(temp);
+          reverse(temp);
 
 
 
