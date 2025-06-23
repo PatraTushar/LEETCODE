@@ -27,10 +27,10 @@ public class Solution {
 
         if(fast==null ) return null;
 
-        ListNode temp=head;
-        while(temp!=slow){
+        slow=head;
+        while(slow!=fast){
             slow=slow.next;
-            temp=temp.next;
+            fast=fast.next;
         }
 
         return slow;
