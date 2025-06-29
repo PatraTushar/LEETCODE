@@ -1,71 +1,72 @@
-class Solution {
-    public int largestRectangleArea(int[] heights) {
+package StackByStriver.interviewQuestions;
+
+import java.util.Stack;
+
+public class Q13 {
+
+    static int largestRectangleHistogram(int[] heights){
+
+        //Time Complexity (TC): O(n)
+        //Space Complexity (SC): O(n)
+
+        if (heights == null || heights.length == 0) return 0;
+
 
         Stack<Integer> st=new Stack<>();
         int n=heights.length;
+        int[] pse=new int[n];
+        int[] nse=new int[n];
 
-    int NSE[]=new int[n];
-    int PSE[]=new int[n];
 
-    //calculate NSE
+        for(int i=0;i<n;i++){
 
-    st.push(n-1);
-    NSE[n-1]=n;
+            while (!st.isEmpty() && heights[st.peek()]>=heights[i]){
+                st.pop();
+            }
 
-    for(int i=n-2;i>=0;i--){
+            pse[i]=st.isEmpty() ? -1 : st.peek();
+            st.push(i);
 
-        while(st.size()>0 && heights[i]<=heights[st.peek()]){
-            st.pop();
+
         }
 
-        if(st.size()==0) NSE[i]=n;
-        else NSE[i]=st.peek();
-        st.push(i);
-    }
-
-    //make the stack empty
-
-    while(st.size()>0) st.pop();
-
-    //calculate PSE
+        st.clear();
 
 
-    st.push(0);
-    PSE[0]=-1;
+        for(int i=n-1;i>=0;i--){
 
-    for(int i=1;i<n;i++){
+            while (!st.isEmpty() && heights[st.peek()]>=heights[i]){
+                st.pop();
+            }
 
-        while(st.size()>0 && heights[i]<=heights[st.peek()] ){
-            st.pop();
+            nse[i]=st.isEmpty() ? n : st.peek();
+            st.push(i);
+
+
         }
 
-        if(st.size()==0) PSE[i]=-1;
+        int largestArea=Integer.MIN_VALUE;
+        int sum;
 
-        else PSE[i]=st.peek();
+        for (int i=0;i<n;i++){
+
+            sum=heights[i]*(nse[i]-pse[i]-1);
+            largestArea=Math.max(largestArea,sum);
 
 
-        st.push(i);
-    }
 
-    //maximum area of a rectangle
-
-    int max=-1;
-
-    for(int i=0;i<n;i++){
-
-        int area=heights[i]* (NSE[i]-PSE[i]-1);
-
-        if(area>max){
-            max=area;
         }
-        
+
+        return largestArea;
+
+
     }
 
-    return max;
+    public static void main(String[] args) {
+
+        int[] arr={2,1,5,6,2,3};
+        System.out.println(largestRectangleHistogram(arr));
 
 
-
-    
-        
     }
 }
